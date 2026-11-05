@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+# 비밀값·런타임 데이터는 커밋하지 않는다
+tokens.json
+hub_data/*.db
+hub_data/*.db-*
+eval/results/

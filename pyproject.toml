@@ -1,0 +1,17 @@
+[project]
+name = "context-hub"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=4.1.6",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "pytest-asyncio>=1.4.1.post1",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
