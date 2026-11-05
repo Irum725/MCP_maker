@@ -82,6 +82,8 @@ claude mcp list
 - 도구가 안 보인다 → 연결한 폴더와 다른 폴더에서 `claude`를 실행했을 가능성(local 범위는 프로젝트별). 해당 폴더에서 다시 등록하거나 `--scope user`.
 - 등록 직후엔 안 보이고 새 세션에서 보인다 → 세션을 다시 시작한다.
 - 변경이 반영되지 않는다 → `claude mcp list`로 파싱 경고를 확인한다.
+- `connect-claude.command`가 "claude 명령을 찾지 못했습니다"라고 한다 → 더블클릭 실행은 `~/.zshrc`를 읽지 않아 PATH에 없을 수 있다. 스크립트가 흔한 설치 경로와 로그인 셸까지 찾아보고, 그래도 없으면 **확인 후 공식 설치 명령**(`curl -fsSL https://claude.ai/install.sh | bash`, Homebrew는 `brew install --cask claude-code`)을 실행한다. 설치 후 처음에는 터미널에서 `claude`를 한 번 실행해 로그인한다.
+- `✘ Failed to connect — ... HTTP 401` → 토큰이 틀렸거나 재발급 전 토큰이다. `connect-claude`를 다시 실행하면 `.hub_env`의 현재 토큰으로 재등록한다.
 
 ---
 
@@ -274,4 +276,6 @@ sqlite3 hub_data/hub.db "select agent, tool, count(*), sum(ok) from audit_log gr
 | Claude Code `--header`, 범위(local/project/user), `/mcp`, 상태 표시 | 공식 문서로 확인 |
 | Antigravity `serverUrl`/`headers`/`enabledTools`/Ask 모드/타임아웃 | 공식 문서로 확인 |
 | ollmcp `mcp add --header`, `/tools`, `/hil`, 모델 요건 | 공식 README로 확인 (`-u`와 헤더 조합은 문서 불분명) |
-| **세 클라이언트의 실제 연결** | **아직 미검증 — 사용자 환경에서 첫 연결 시 확인 필요** |
+| **Claude Code ↔ 허브 실제 연결** | **검증됨** (Claude Code 2.1.317, Linux 임시 환경): 올바른 토큰 `✔ Connected`, 틀린 토큰 `HTTP 401` 안내 확인 |
+| `connect-claude` 스크립트의 claude 탐색·설치 흐름 | 가짜 설치 명령으로 시나리오 검증(없음/거절/설치 성공/설치 실패/경로 밖 설치). 실제 설치는 사용자 Mac에서 `y`를 눌러야 실행됨 |
+| **Antigravity, ollmcp의 실제 연결** | **아직 미검증 — 사용자 환경에서 첫 연결 시 확인 필요** |
