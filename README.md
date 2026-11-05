@@ -18,7 +18,13 @@ Ollama(ollmcp)┘          └── hub_data/hub.db (SQLite WAL + FTS5)
 | 사람용 노트 승인 CLI | `scripts/approve_note.py` |
 | 도구 선택 정확도 평가 틀 | `eval/run_eval.py`, `eval/scenarios.json` |
 
-## 빠른 시작
+## 원클릭 실행 (Mac)
+1. `start.command` 더블클릭 → 환경 준비, 최초 1회 토큰 발급(`.hub_env`에 저장), 서버 시작
+2. `connect-claude.command` 더블클릭 → Claude Code에 context-hub 등록
+첫 실행 시 "확인되지 않은 개발자" 경고가 나오면 우클릭 → 열기. 실행 권한이 없으면 `chmod +x *.command`.
+`.hub_env`는 평문 토큰이 들어 있어 본인만 읽을 수 있게(600) 저장되고 git에서 제외된다.
+
+## 빠른 시작 (터미널)
 ```bash
 uv sync
 uv run python scripts/gen_tokens.py          # 에이전트별 토큰 발급 (평문은 이때 한 번만 표시)
@@ -36,7 +42,8 @@ npx @modelcontextprotocol/inspector          # 브라우저에서 직접 호출 
 ## 클라이언트 연결
 발급된 토큰을 환경변수로 두고 설정에는 평문을 직접 쓰지 않는다. (아래 설정 형식은 클라이언트 버전에 따라 다를 수 있으니 각 문서로 확인)
 
-- **Claude Code:** `claude mcp add --transport http --scope project context-hub http://127.0.0.1:8765/mcp --header "Authorization: Bearer $HUB_TOKEN_CLAUDE"`
+- **Claude Code:** `claude mcp add --transport http --scope local context-hub http://127.0.0.1:8765/mcp --header "Authorization: Bearer $HUB_TOKEN_CLAUDE"`
+  (⚠ `--scope project`는 토큰이 저장소의 `.mcp.json`에 평문으로 저장되므로 쓰지 않는다. `.mcp.json`은 gitignore에도 들어 있다.)
 - **Antigravity:** `~/.gemini/config/mcp_config.json`
   ```json
   { "mcpServers": { "context-hub": {

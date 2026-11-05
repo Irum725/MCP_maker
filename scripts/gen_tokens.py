@@ -18,6 +18,7 @@ def main() -> None:
     ap.add_argument("names", nargs="*", default=list(DEFAULT_AGENTS))
     ap.add_argument("--out", default="tokens.json")
     ap.add_argument("--force", action="store_true", help="기존 파일을 덮어쓴다(기존 토큰 전부 무효화)")
+    ap.add_argument("--env-out", help="평문 토큰을 `export HUB_TOKEN_<이름>=...` 형태로 저장(본인만 읽기 가능, gitignore). 원클릭 연결 스크립트용")
     a = ap.parse_args()
     out = Path(a.out)
     if out.exists() and not a.force:
@@ -29,6 +30,11 @@ def main() -> None:
         plain[n] = t
     out.write_text(json.dumps({"agents": agents}, indent=2), encoding="utf-8")
     out.chmod(stat.S_IRUSR | stat.S_IWUSR)
+    if a.env_out:
+        env = Path(a.env_out)
+        env.write_text("".join(f"export HUB_TOKEN_{n.upper()}='{t}'\n" for n, t in plain.items()), encoding="utf-8")
+        env.chmod(stat.S_IRUSR | stat.S_IWUSR)
+        print(f"# 평문 토큰을 {env}에 저장했습니다 (본인만 읽기 가능, git 제외)")
     print(f"# {out} 저장 완료 (해시만 저장됨). 아래 토큰은 지금만 볼 수 있습니다.\n")
     for n, t in plain.items():
         print(f"{n}: {t}")

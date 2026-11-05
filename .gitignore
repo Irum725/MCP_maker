@@ -9,3 +9,5 @@ hub_data/*.db
 hub_data/*.db-*
 eval/results/
 _sync/
+.hub_env
+.mcp.json
