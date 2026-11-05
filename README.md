@@ -18,10 +18,11 @@ Ollama(ollmcp)┘          └── hub_data/hub.db (SQLite WAL + FTS5)
 | 사람용 노트 승인 CLI | `scripts/approve_note.py` |
 | 도구 선택 정확도 평가 틀 | `eval/run_eval.py`, `eval/scenarios.json` |
 
-## 원클릭 실행 (Mac)
-1. `start.command` 더블클릭 → 환경 준비, 최초 1회 토큰 발급(`.hub_env`에 저장), 서버 시작
-2. `connect-claude.command` 더블클릭 → Claude Code에 context-hub 등록
-첫 실행 시 "확인되지 않은 개발자" 경고가 나오면 우클릭 → 열기. 실행 권한이 없으면 `chmod +x *.command`.
+## 원클릭 실행 (Mac: .command / Windows: .bat)
+1. `start.command`(Windows는 `start.bat`) 더블클릭 → 환경 준비, 최초 1회 토큰 발급(`.hub_env`에 저장), 서버 시작
+2. `connect-claude.command`(Windows는 `connect-claude.bat`) 더블클릭 → Claude Code에 context-hub 등록
+Mac: 첫 실행 시 "확인되지 않은 개발자" 경고가 나오면 우클릭 → 열기. 실행 권한이 없으면 `chmod +x *.command`.
+Windows: `uv`가 없으면 `winget install --id=astral-sh.uv -e`. SmartScreen 경고가 나오면 "추가 정보 → 실행".
 `.hub_env`는 평문 토큰이 들어 있어 본인만 읽을 수 있게(600) 저장되고 git에서 제외된다.
 
 ## 빠른 시작 (터미널)
