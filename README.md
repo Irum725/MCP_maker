@@ -1,7 +1,7 @@
 # Context Hub MCP
 
 Antigravity, Claude Code, 로컬 AI(Ollama)가 **같은 MCP 서버 하나**에 연결해 작업 기억(노트·할 일·결정·인수인계)을 공유하는 프로젝트.
-협업 규칙은 [AGENTS.md](AGENTS.md)가 단일 원본이다.
+협업 규칙은 [AGENTS.md](AGENTS.md)가 단일 원본이고, AI별 연결·사용법은 **[docs/MANUAL.md](docs/MANUAL.md)** 를 본다.
 
 ```
 Antigravity ─┐
