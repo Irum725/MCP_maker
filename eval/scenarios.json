@@ -1,0 +1,14 @@
+[
+  {"id": "s01", "prompt": "context-hub 프로젝트 작업을 지금 시작할게. 이전 맥락부터 확인해줘.", "expect_tool": "start_session"},
+  {"id": "s02", "prompt": "프로젝트 demo에서 '토큰 인증'에 대해 예전에 정한 내용이 있는지 찾아줘.", "expect_tool": "search_notes"},
+  {"id": "s03", "prompt": "검색 결과에 나온 노트 12번의 전체 내용을 읽어줘.", "expect_tool": "read_note"},
+  {"id": "s04", "prompt": "프로젝트 demo에 '저장소는 SQLite로 한다'는 결정을 기록해줘.", "expect_tool": "add_note", "expect_args": {"kind": "decision"}},
+  {"id": "s05", "prompt": "프로젝트 demo에 '로그인 화면 만들기'라는 할 일을 새로 등록해줘.", "expect_tool": "create_task"},
+  {"id": "s06", "prompt": "프로젝트 demo에서 아직 아무도 안 맡은 할 일이 뭐가 있는지 보여줘.", "expect_tool": "list_tasks", "expect_args": {"status": "open"}},
+  {"id": "s07", "prompt": "3번 작업을 내가 맡을게.", "expect_tool": "claim_task", "expect_args": {"task_id": 3}},
+  {"id": "s08", "prompt": "3번 작업이 오래 걸리고 있어서 점유 시간을 늘려줘.", "expect_tool": "heartbeat_task", "expect_args": {"task_id": 3}},
+  {"id": "s09", "prompt": "3번 작업 끝났어. 결과는 '로그인 폼 구현 완료'야.", "expect_tool": "complete_task", "expect_args": {"task_id": 3}},
+  {"id": "s10", "prompt": "오늘 작업을 마칠게. 세션 7번을 종료하고, 다음 사람이 이어서 테스트를 돌리면 된다고 남겨줘.", "expect_tool": "end_session", "expect_args": {"session_id": 7}},
+  {"id": "s11", "prompt": "demo 프로젝트에서 'FTS'라는 단어가 들어간 기록을 찾아봐.", "expect_tool": "search_notes"},
+  {"id": "s12", "prompt": "다음 AI가 참고할 수 있게 이번 작업의 커밋 abc1234를 가리키는 메모를 남겨줘. 프로젝트는 demo.", "expect_tool": "add_note"}
+]
